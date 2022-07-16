@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            <%= title %>
+        </title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <script src="https://kit.fontawesome.com/ce00548baa.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section id="heading">
+            <h1 class="text-center text-muted">TODO APP</h1>
+        </section>
+        <section id="task-form">
+            <form action="/create-task" method="POST" id="input-form">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr class="table-danger">
+                            <td colspan="2">
+                                <label for="description" class="form-label fw-bold text-secondary">DESCRIPTION</label><br>
+                                <input type="text" name="description" id="description" placeholder="What do you need to do? " class="form-control" required>
+
+                            </td>
+                        </tr>
+                        <tr class="table-info">
+                            <td>
+                            <!-- select category -->
+                                <label for="category" class="form-label fw-bold text-secondary">CATEGORY</label><br>
+                                <select name="category" id="category" class="form-select" required>
+                                    <option value="" selected class="fw-bold text-muted">Choose a category</option>
+                                    <option value="personal">Personal</option>
+                                    <option value="work">Work</option>
+                                    <option value="school">School</option>
+                                    <option value="cleaning">Cleaning</option>
+                                    <option value="other">Other</option>
+                                </select> 
+                            </td>
+                            <td >
+                                <label for="due-date" class="form-label fw-bold text-secondary">DUE DATE</label><br>
+                                <input type="date" name="duedate" id="due-date" class="form-control" required>
+                            </td>
+                        </tr>
+                        <tr class="table-warning text-center">
+                            <td colspan="2">
+                                <button type="submit" class="btn btn-success btn-lg" form="input-form">
+                                    <i class="fa-solid fa-plus"></i>
+                                    ADD TASK
+                                </button>&nbsp;
+                                <button type="submit" class="btn btn-danger btn-lg" form="delete-form">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    DELETE TASKS
+                                </button>
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>
+                
+            </form>
+        </section>
+        <section id="show-task">
+            <form action="/delete-task" method="POST" id="delete-form">
+                <% for(let i of task_list){ %>
+                    <hr class="text-secondary">
+                    <div class="task-container d-flex justify-content-between mx-5 w-75">
+                        <div class="task d-flex justify-content-around form-check">
+                            <div class="checkbox mt-2 me-3">
+                                <input type="checkbox" name="tasks" value="<%= i._id %>" id="<%= i._id %>" class="form-check-input">
+                            </div>
+                            <div class="description-and-duedate d-flex flex-column">
+                                <label for="<%= i._id %>" class="form-check-label fw-bold text-secondary fs-4 font-monospace"><%= i.description %></label>
+                                <div class="due-date d-flex">
+                                    <i class="fa-solid fa-calendar-days me-3 p-1"></i>
+                                    <%= i.duedate.toDateString() %>
+                                </div>    
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning disabled" id="category" style="width: 5rem;height:3rem;">
+                            <%= i.category %>
+                        </button>
+                    </div>
+                <% } %>
+            </form>
+        </section>
+    </body>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
+</html>

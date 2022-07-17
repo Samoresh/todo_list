@@ -1,0 +1,32 @@
+input[type=checkbox]:checked + div{
+    text-decoration: line-through;
+}
+* {
+    transition-duration: 0.5s;
+}
+#toggle-bar{
+	width: 5rem;
+	height: 2rem;
+	border: 2px solid black;
+	border-radius: 24px;
+	position: relative;
+	/* background-color: white; */
+}
+#toggle-button{
+	/* background-color: black; */
+	width: 2rem;
+	height: inherit;
+	border-radius: inherit;
+	position: absolute;
+	/*left: 0;*/
+	transition-duration: 1s;
+	cursor: pointer;
+}
+.black{
+	background-color: black;
+	color: white;
+}
+.right{
+	/*left:initial;*/
+	right: 0;
+}

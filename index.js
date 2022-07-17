@@ -12,7 +12,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('assets'));
 
-
+//rendering the home page
 app.get('/',function(req,res){
     Task.find({},function(err,tasks){
      if(err){
@@ -25,7 +25,7 @@ app.get('/',function(req,res){
      });
     });
  });
-
+//adding a new task to the database
 app.post('/create-task',function(req,res){
     Task.create({
         description: req.body.description,
@@ -77,6 +77,7 @@ function deleteTasks(tasks) {
         }
     }
 }
+//to delete task and tried deleting multiple tasks
 app.post('/delete-task', async function(req,res){
     var obj= req.body;
     console.log(req.body);
